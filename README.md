@@ -1,78 +1,250 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19955111&assignment_repo_type=AssignmentRepo)
-# Deployment and DevOps for MERN Applications
+# MERN Stack Testing Suite
 
-This assignment focuses on deploying a full MERN stack application to production, implementing CI/CD pipelines, and setting up monitoring for your application.
+A comprehensive testing environment for MERN (MongoDB, Express.js, React, Node.js) stack applications.
 
-## Assignment Overview
+## Project Structure
 
-You will:
-1. Prepare your MERN application for production deployment
-2. Deploy the backend to a cloud platform
-3. Deploy the frontend to a static hosting service
-4. Set up CI/CD pipelines with GitHub Actions
-5. Implement monitoring and maintenance strategies
+\`\`\`
+mern-testing/
+├── client/                 # React front-end
+│   ├── src/                # React source code
+│   │   ├── components/     # React components
+│   │   ├── contexts/       # React contexts
+│   │   ├── utils/          # Utility functions
+│   │   ├── tests/          # Client-side tests
+│   │   │   ├── unit/       # Unit tests
+│   │   │   └── integration/ # Integration tests
+│   │   └── App.jsx         # Main application component
+│   └── cypress/            # End-to-end tests
+├── server/                 # Express.js back-end
+│   ├── src/                # Server source code
+│   │   ├── controllers/    # Route controllers
+│   │   ├── models/         # Mongoose models
+│   │   ├── routes/         # API routes
+│   │   ├── middleware/     # Custom middleware
+│   │   └── utils/          # Server utilities
+│   └── tests/              # Server-side tests
+│       ├── unit/           # Unit tests
+│       └── integration/    # Integration tests
+├── jest.config.js          # Jest configuration
+└── package.json            # Project dependencies
+\`\`\`
+
+## Features
+
+### 🧪 Testing Framework
+- **Jest** - JavaScript testing framework
+- **React Testing Library** - React component testing
+- **Supertest** - HTTP assertion library
+- **Cypress** - End-to-end testing
+- **MongoDB Memory Server** - In-memory database for testing
+
+### 🔧 Testing Types
+- **Unit Testing** - Individual component and function testing
+- **Integration Testing** - API endpoints and database operations
+- **End-to-End Testing** - Complete user workflows
+- **Component Testing** - React component behavior
 
 ## Getting Started
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week7-Assignment.md` file
-4. Use the provided templates and configuration files as a starting point
+### Prerequisites
+- Node.js 16+
+- MongoDB
+- npm or yarn
 
-## Files Included
+### Installation
 
-- `Week7-Assignment.md`: Detailed assignment instructions
-- `.github/workflows/`: GitHub Actions workflow templates
-- `deployment/`: Deployment configuration files and scripts
-- `.env.example`: Example environment variable templates
-- `monitoring/`: Monitoring configuration examples
+1. Clone the repository
+\`\`\`bash
+git clone <repository-url>
+cd mern-testing
+\`\`\`
 
-## Requirements
+2. Install all dependencies
+\`\`\`bash
+npm run install:all
+\`\`\`
 
-- A completed MERN stack application from previous weeks
-- Accounts on the following services:
-  - GitHub
-  - MongoDB Atlas
-  - Render, Railway, or Heroku (for backend)
-  - Vercel, Netlify, or GitHub Pages (for frontend)
-- Basic understanding of CI/CD concepts
+3. Set up environment variables
+\`\`\`bash
+# Create server/.env
+cd server
+cp .env.example .env
+\`\`\`
 
-## Deployment Platforms
+4. Start the development servers
+\`\`\`bash
+# From root directory
+npm run dev
+\`\`\`
 
-### Backend Deployment Options
-- **Render**: Easy to use, free tier available
-- **Railway**: Developer-friendly, generous free tier
-- **Heroku**: Well-established, extensive documentation
+This will start:
+- React client on http://localhost:3000
+- Express server on http://localhost:5000
 
-### Frontend Deployment Options
-- **Vercel**: Optimized for React apps, easy integration
-- **Netlify**: Great for static sites, good CI/CD
-- **GitHub Pages**: Free, integrated with GitHub
+## Testing Commands
 
-## CI/CD Pipeline
+### All Tests
+\`\`\`bash
+# Run all tests (client + server)
+npm test
 
-The assignment includes templates for setting up GitHub Actions workflows:
-- `frontend-ci.yml`: Tests and builds the React application
-- `backend-ci.yml`: Tests the Express.js backend
-- `frontend-cd.yml`: Deploys the frontend to your chosen platform
-- `backend-cd.yml`: Deploys the backend to your chosen platform
+# Run tests with coverage
+npm run test:coverage
 
-## Submission
+# Run complete test suite including E2E
+npm run test:all
+\`\`\`
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+### Client Tests
+\`\`\`bash
+# Run client tests
+npm run client:test
 
-1. Complete all deployment tasks
-2. Set up CI/CD pipelines with GitHub Actions
-3. Deploy both frontend and backend to production
-4. Document your deployment process in the README.md
-5. Include screenshots of your CI/CD pipeline in action
-6. Add URLs to your deployed applications
+# Run client tests in watch mode
+cd client && npm test
+\`\`\`
 
-## Resources
+### Server Tests
+\`\`\`bash
+# Run server tests
+npm run server:test
 
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/)
-- [Render Documentation](https://render.com/docs)
-- [Railway Documentation](https://docs.railway.app/)
-- [Vercel Documentation](https://vercel.com/docs)
-- [Netlify Documentation](https://docs.netlify.com/) 
+# Run server tests in watch mode
+cd server && npm run test:watch
+\`\`\`
+
+### End-to-End Tests
+\`\`\`bash
+# Open Cypress test runner
+npm run test:e2e
+
+# Run E2E tests headlessly
+npm run test:e2e:headless
+\`\`\`
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/profile` - Get user profile (protected)
+
+### Users
+- `GET /api/users` - Get all users (protected)
+- `GET /api/users/:id` - Get user by ID (protected)
+- `PUT /api/users/:id` - Update user (protected)
+- `DELETE /api/users/:id` - Delete user (admin only)
+
+## Environment Variables
+
+### Server (.env)
+\`\`\`
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/mern-testing
+JWT_SECRET=your-super-secret-jwt-key
+CLIENT_URL=http://localhost:3000
+\`\`\`
+
+### Client (.env)
+\`\`\`
+REACT_APP_API_URL=http://localhost:5000/api
+\`\`\`
+
+## Testing Strategies
+
+### Unit Testing
+- **Components**: Rendering, props, user interactions
+- **Utilities**: Function inputs/outputs, edge cases
+- **Controllers**: Business logic, error handling
+- **Models**: Data validation, methods
+
+### Integration Testing
+- **API Endpoints**: Request/response cycles
+- **Database Operations**: CRUD operations
+- **Authentication**: Login/logout flows
+- **Component Integration**: API interactions
+
+### End-to-End Testing
+- **User Flows**: Registration, login, navigation
+- **Error Handling**: Network failures, validation
+- **Cross-browser**: Compatibility testing
+- **Visual Testing**: UI consistency
+
+## Development Workflow
+
+1. **Start Development**
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+
+2. **Run Tests During Development**
+   \`\`\`bash
+   # Terminal 1: Run client tests in watch mode
+   cd client && npm test
+
+   # Terminal 2: Run server tests in watch mode
+   cd server && npm run test:watch
+   \`\`\`
+
+3. **Before Committing**
+   \`\`\`bash
+   npm run test:all
+   \`\`\`
+
+## Debugging
+
+### Client-Side
+- React Developer Tools
+- Browser DevTools
+- Error boundaries for graceful error handling
+
+### Server-Side
+- Structured logging with different levels
+- Error handling middleware
+- Request/response logging
+
+### Testing
+- Jest debugging with `--verbose` flag
+- Cypress debugging with browser DevTools
+- Test isolation and cleanup
+
+## Contributing
+
+1. Write tests for new features
+2. Maintain code coverage above 70%
+3. Follow existing code patterns
+4. Update documentation
+
+## Troubleshooting
+
+### Common Issues
+
+**Port conflicts**
+- Change ports in package.json scripts
+- Check if ports 3000/5000 are available
+
+**Database connection**
+- Ensure MongoDB is running
+- Check connection string in .env
+
+**Test failures**
+- Clear test database between runs
+- Check for async/await issues
+- Verify mock implementations
+
+## Scripts Reference
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start both client and server |
+| `npm run build` | Build both applications |
+| `npm test` | Run all tests |
+| `npm run test:coverage` | Run tests with coverage |
+| `npm run test:e2e` | Open Cypress test runner |
+| `npm run install:all` | Install all dependencies |
+
+## License
+
+MIT License - see LICENSE file for details
