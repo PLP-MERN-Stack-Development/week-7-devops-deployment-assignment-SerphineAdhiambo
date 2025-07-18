@@ -2,34 +2,6 @@
 
 A comprehensive testing environment for MERN (MongoDB, Express.js, React, Node.js) stack applications.
 
-## Project Structure
-
-\`\`\`
-mern-testing/
-├── client/                 # React front-end
-│   ├── src/                # React source code
-│   │   ├── components/     # React components
-│   │   ├── contexts/       # React contexts
-│   │   ├── utils/          # Utility functions
-│   │   ├── tests/          # Client-side tests
-│   │   │   ├── unit/       # Unit tests
-│   │   │   └── integration/ # Integration tests
-│   │   └── App.jsx         # Main application component
-│   └── cypress/            # End-to-end tests
-├── server/                 # Express.js back-end
-│   ├── src/                # Server source code
-│   │   ├── controllers/    # Route controllers
-│   │   ├── models/         # Mongoose models
-│   │   ├── routes/         # API routes
-│   │   ├── middleware/     # Custom middleware
-│   │   └── utils/          # Server utilities
-│   └── tests/              # Server-side tests
-│       ├── unit/           # Unit tests
-│       └── integration/    # Integration tests
-├── jest.config.js          # Jest configuration
-└── package.json            # Project dependencies
-\`\`\`
-
 ## Features
 
 ### 🧪 Testing Framework
